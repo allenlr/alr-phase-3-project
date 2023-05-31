@@ -138,4 +138,4 @@ fetch("http://localhost:9292/test")
 [network tab]: https://developer.chrome.com/docs/devtools/network/
 
 
-token: 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
+token: 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
