@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
     user = User.find(params[:id])
     user.update(
       username: params[:username],
-      password_digest: params[:password_digest],
+      password: params[:password],
       email: params[:email]
     )
     user.to_json
@@ -37,7 +37,7 @@ class ApplicationController < Sinatra::Base
   post '/users' do
     user = User.create(
       username: params[:username],
-      password_digets: params[:password_digest],
+      password: params[:password],
       email: params[:email],
       first_name: params[:first_name],
       last_name: params[:last_name]
