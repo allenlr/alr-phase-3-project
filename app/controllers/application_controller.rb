@@ -17,8 +17,54 @@ class ApplicationController < Sinatra::Base
     user.update(
       username: params[:username],
       password_digest: params[:password_digest],
-      email: params[:email],
+      email: params[:email]
     )
+    user.to_json
   end
 
+  patch '/expenses/:id' do
+    expense = Expense.find(params[:id])
+    expense.update(
+      name: params[:name],
+      amount: params[:amount],
+      date_incurred: params[:date_incurred],
+      category: params[:category],
+      payment_method: params[:payment_method]
+    )
+    expense.to_json
+  end
+
+  post '/users' do
+    user = User.create(
+      username: params[:username],
+      password_digets: params[:password_digest],
+      email: params[:email],
+      first_name: params[:first_name],
+      last_name: params[:last_name]
+    )
+    user.to_json
+  end
+
+  post '/expenses' do
+    expense = Expense.create(
+      name: params[:name],
+      amount: params[:amount],
+      date_incurred: params[:date_incurred],
+      category: params[:category],
+      payment_method: params[:payment_method]
+    )
+    expense.to_json
+  end
+
+  delete '/users/:id' do
+    user = User.find(params[:id])
+    user.destroy
+    user.to_json
+  end
+
+  delete '/expenses/:id' do
+    expense = Expense.find(params[:id])
+    expense.destroy
+    expense.to_json
+  end
 end
