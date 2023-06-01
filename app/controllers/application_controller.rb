@@ -12,6 +12,21 @@ class ApplicationController < Sinatra::Base
     users.to_json
   end
 
+  get '/users/:id' do
+    user = User.find(params[:id])
+    user.to_json
+  end
+
+  get '/expenses/:id' do
+    expense = Expense.find(params[:id])
+    expense.to_json
+  end
+
+  get '/expenses/by_user/:id' do
+    expenses = Expense.where(user_id: params[:id])
+    expenses.to_json
+  end
+
   patch '/users/:id' do
     user = User.find(params[:id])
     user.update(
