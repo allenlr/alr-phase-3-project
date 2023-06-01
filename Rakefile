@@ -22,3 +22,12 @@ task :console do
   ActiveRecord::Base.logger = Logger.new(STDOUT)
   Pry.start
 end
+
+namespace :db do
+  desc "Seed the database"
+  task :seed do
+    abort("Not allowed to run this task in the #{ENV['RACK_ENV']} environment") unless ['development', 'test'].include?(ENV['RACK_ENV'])
+
+    load 'db/seed.rb'
+  end
+end

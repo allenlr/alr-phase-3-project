@@ -1,6 +1,6 @@
 require 'faker'
 
-puts "🌱 Seeding spices..."
+puts "🌱 Seeding"
 
 expense_categories = [
     "Rent/Mortgage",
@@ -19,6 +19,20 @@ expense_categories = [
     "Miscellaneous"
 ]
 
+payment_methods = [
+    "Credit Card",
+    "Debit Card",
+    "Gift Card",
+    "Cash"
+]
+
+# User.destroy_all
+# Expense.destroy_all
+[User, Expense].each do |model|
+    model.destroy_all
+    ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='#{model.table_name}'")
+end
+
 10.times do
     User.create(
         username: Faker::Internet.username,
@@ -35,6 +49,7 @@ User.all.each do |user|
             name: Faker::Commerce.product_name,
             amount: Faker::Commerce.price(range: 10.00..200.00),
             category: expense_categories.sample,
+            payment_method: payment_methods.sample,
             user_id: user.id
         )
     end
