@@ -39,7 +39,8 @@ end
         password: 'password',
         email: Faker::Internet.email,
         first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name
+        last_name: Faker::Name.last_name,
+        monthly_budget: rand(2000..10000)
     )
 end
 
