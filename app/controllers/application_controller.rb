@@ -36,6 +36,7 @@ class ApplicationController < Sinatra::Base
     expenses = Expense.order(price: :desc).reverse.limit(10)
     expenses.to_json
   end
+  
 
   patch '/users/:id' do
     user = User.find(params[:id])

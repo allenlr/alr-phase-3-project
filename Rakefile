@@ -28,6 +28,5 @@ namespace :db do
   task :seed do
     abort("Not allowed to run this task in the #{ENV['RACK_ENV']} environment") unless ['development', 'test'].include?(ENV['RACK_ENV'])
 
-    load 'db/seed.rb'
   end
 end
