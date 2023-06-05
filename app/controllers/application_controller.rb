@@ -28,12 +28,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/expenses/by_price' do
-    expenses = Expense.order(:price).reverse
+    expenses = Expense.order(amount: :desc)
     expenses.to_json
   end
 
   get '/expenses/most_expensive' do
-    expenses = Expense.order(price: :desc).reverse.limit(10)
+    expenses = Expense.order(amount: :desc).limit(10)
     expenses.to_json
   end
 
