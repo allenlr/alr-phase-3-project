@@ -70,7 +70,8 @@ class ApplicationController < Sinatra::Base
       password: params[:password],
       email: params[:email],
       first_name: params[:first_name],
-      last_name: params[:last_name]
+      last_name: params[:last_name],
+      monthly_budget: params[:monthly_budget]
     )
     user.to_json
   end
