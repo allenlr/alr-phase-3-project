@@ -27,6 +27,15 @@ class ApplicationController < Sinatra::Base
     expenses.to_json
   end
 
+  post '/users/login' do
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      user.to_json
+    else
+      halt 401, { error: "Invalid username or password" }.to_json
+    end
+  end
+
   get '/expenses/by_price' do
     expenses = Expense.order(amount: :desc)
     expenses.to_json
