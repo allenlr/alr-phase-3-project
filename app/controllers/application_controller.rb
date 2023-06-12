@@ -27,6 +27,13 @@ class ApplicationController < Sinatra::Base
     expenses.to_json
   end
 
+  get '/expenses/by_user/:id/:category' do
+    user = User.find(params[:id])
+    category = CGI.unescape(params[:category])
+    expenses = user.expenses.where(category: category)
+    expenses.to_json
+  end
+
   post '/users/login' do
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])

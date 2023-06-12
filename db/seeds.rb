@@ -57,5 +57,22 @@ User.all.each do |user|
         )
     end
 end
+user = User.find_by(id: 20)
+
+if user
+    10.times do
+        Expense.create(
+            name: Faker::Commerce.product_name,
+                amount: Faker::Commerce.price(range: 10.00..200.00),
+                # date_incurred: Faker::Date.between(from: user.created_at, to: Date.today),
+                date_incurred: Faker::Date.between(from: Faker::Date.between(from: 2.year.ago, to: Date.today), to: Date.today),
+                category: expense_categories.sample,
+                payment_method: payment_methods.sample,
+                user_id: user.id
+        )
+    end
+else
+    puts "User not found"
+end
 
 puts "✅ Done seeding!"
