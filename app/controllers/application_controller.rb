@@ -1,3 +1,5 @@
+require 'pry'
+
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
@@ -29,7 +31,7 @@ class ApplicationController < Sinatra::Base
 
   get '/expenses/by_user/:id/:category' do
     user = User.find(params[:id])
-    category = CGI.unescape(params[:category])
+    category = params[:category].gsub('_', '/')
     expenses = user.expenses.where(category: category)
     expenses.to_json
   end
