@@ -95,7 +95,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/expenses' do
-    expense = Expense.create(
+    user = User.find(params[:user_id])
+    expense = user.expenses.create(
       name: params[:name],
       amount: params[:amount],
       date_incurred: params[:date_incurred],
