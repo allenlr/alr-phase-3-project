@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     def over_budget?(month)
         monthly_spending(month) > self.monthly_budget
     end
+
+    def full_name
+        "#{self.first_name} #{self.last_name}"
+    end
 end
