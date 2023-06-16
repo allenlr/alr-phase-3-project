@@ -11,7 +11,7 @@ class ExpensesController < Sinatra::Base
     expense.to_json
     end
 
-    get '/expenses/by_user/:id' do
+    get '/by_user/:id' do
         expenses = Expense.where(user_id: params[:id])
         expenses.to_json
       end
