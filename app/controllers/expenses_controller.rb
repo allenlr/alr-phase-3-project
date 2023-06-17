@@ -46,14 +46,7 @@ class ExpensesController < Sinatra::Base
     end
 
     post '/' do
-        user = User.find_by(id: params[:user_id])
-        expense = user.expenses.create(
-          name: params[:name],
-          amount: params[:amount],
-          date_incurred: params[:date_incurred],
-          category: params[:category],
-          payment_method: params[:payment_method]
-        )
+        epxense = Expense.create(params)
         expense.to_json
     end
 

@@ -36,14 +36,7 @@ class UsersController < Sinatra::Base
     end
 
     post '/' do
-        user = User.create(
-          username: params[:username],
-          password: params[:password],
-          email: params[:email],
-          first_name: params[:first_name],
-          last_name: params[:last_name],
-          monthly_budget: params[:monthly_budget]
-        )
+        user = User.create(params)
         user.to_json
     end
 
