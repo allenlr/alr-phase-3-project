@@ -1,31 +1,17 @@
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
     set :default_content_type, 'application/json'
 
-    get '/' do
+    get '/users' do
         users = User.all
         users.to_json(include: :expenses)
       end
-    
-    get '/:id' do
+
+    get '/users/:id' do
         user = User.find_by(id: params[:id])
         user.to_json(include: :expenses)
     end
 
-    post '/login' do
-        user = User.find_by(username: params[:username])
-        if user && user.authenticate(params[:password])
-            user.to_json
-        else
-            halt 401, { error: "Invalid username or password" }.to_json
-        end
-    end
-
-    get '/budget/:id' do
-        user_budget = User.find_by(id: params[:id]).monthly_budget
-        user_budget.to_json
-    end
-
-    patch '/:id' do
+    patch '/users/:id' do
         user = User.find_by(id: params[:id])
         user.update(
           username: params[:username],
@@ -35,12 +21,12 @@ class UsersController < Sinatra::Base
         user.to_json
     end
 
-    post '/' do
+    post '/users' do
         user = User.create(params)
         user.to_json
     end
 
-    delete '/:id' do
+    delete '/users/:id' do
         user = User.find_by(id: params[:id])
         user.destroy
         user.to_json

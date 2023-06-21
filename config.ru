@@ -14,12 +14,9 @@ end
 use Rack::JSONBodyParser
 
 # Our application
+use UsersController
+
+use ExpensesController
+
 run ApplicationController
 
-map '/users' do
-  run UsersController
-end
-
-map '/expenses' do
-  run ExpensesController
-end

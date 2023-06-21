@@ -3,28 +3,14 @@ require 'faker'
 puts "🌱 Seeding"
 
 expense_categories = [
-    "Rent/Mortgage",
-    "Utilities",
-    "Groceries",
-    "Eating Out",
+    "All",
+    "Hotel",
+    "Meal",
+    "Miscellaneous food and beverage",
+    "Telecommunication",
     "Transportation",
-    "Healthcare",
-    "Entertainment",
-    "Personal Care",
-    "Education",
-    "Clothing",
-    "Savings",
-    "Investments",
-    "Debt Repayment",
-    "Miscellaneous"
-]
-
-payment_methods = [
-    "Credit Card",
-    "Debit Card",
-    "Gift Card",
-    "Cash"
-]
+    "Other"
+  ]
 
 # User.destroy_all
 # Expense.destroy_all
@@ -36,11 +22,9 @@ end
 10.times do
     User.create(
         username: Faker::Internet.username,
-        password: 'password',
         email: Faker::Internet.email,
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        monthly_budget: rand(2000..10000)
     )
 end
 
@@ -52,27 +36,9 @@ User.all.each do |user|
             # date_incurred: Faker::Date.between(from: user.created_at, to: Date.today),
             date_incurred: Faker::Date.between(from: Faker::Date.between(from: 2.year.ago, to: Date.today), to: Date.today),
             category: expense_categories.sample,
-            payment_method: payment_methods.sample,
             user_id: user.id
         )
     end
-end
-user = User.find_by(id: 20)
-
-if user
-    10.times do
-        Expense.create(
-            name: Faker::Commerce.product_name,
-                amount: Faker::Commerce.price(range: 10.00..200.00),
-                # date_incurred: Faker::Date.between(from: user.created_at, to: Date.today),
-                date_incurred: Faker::Date.between(from: Faker::Date.between(from: 2.year.ago, to: Date.today), to: Date.today),
-                category: expense_categories.sample,
-                payment_method: payment_methods.sample,
-                user_id: user.id
-        )
-    end
-else
-    puts "User not found"
 end
 
 puts "✅ Done seeding!"
