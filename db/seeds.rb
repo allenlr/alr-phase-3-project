@@ -3,7 +3,6 @@ require 'faker'
 puts "🌱 Seeding"
 
 expense_categories = [
-    "All",
     "Hotel",
     "Meal",
     "Miscellaneous food and beverage",
