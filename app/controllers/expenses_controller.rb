@@ -26,13 +26,17 @@ class ExpensesController < ApplicationController
     post '/users/:user_id/expenses' do
         user = User.find_by(id: params[:user_id])
         if user
-          expense = user.expenses.create(
+          expense = user.expenses.new(
             name: params[:name],
             amount: params[:amount],
             date_incurred: params[:date_incurred],
             category: params[:category]
           )
-          expense.to_json
+          if expense.save
+            expense.to_json
+          else
+            { error: expense.errors.full_messages.to_sentence }.to_json
+          end
         else
           { error: "User Not Found" }.to_json
         end
