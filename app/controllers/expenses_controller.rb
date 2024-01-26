@@ -35,9 +35,11 @@ class ExpensesController < ApplicationController
           if expense.save
             expense.to_json
           else
+            status 422
             { error: expense.errors.full_messages.to_sentence }.to_json
           end
         else
+          status 404
           { error: "User Not Found" }.to_json
         end
     end
